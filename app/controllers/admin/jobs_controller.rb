@@ -1,5 +1,6 @@
 class Admin::JobsController < ApplicationController
   before_action :authenticate_user!, only:[:new, :create, :edit, :udpate, :destroy]
+  before_filter :require_is_admin
 
   def index
     @jobs = Job.all
@@ -41,6 +42,7 @@ class Admin::JobsController < ApplicationController
     redirect_to admin_jobs_path, alert: "Job Deleted"
   end
 
+  
   private
 
   def job_params
